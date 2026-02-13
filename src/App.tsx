@@ -87,6 +87,12 @@ function App() {
           </div>
 
           <div className="flex items-center gap-4 text-xs font-mono-tech text-cyan-400/80">
+            <button
+              onClick={startListening}
+              className="px-3 py-1 rounded border border-cyan-500/30 hover:bg-cyan-500/20 transition-all cursor-pointer"
+            >
+              RESTART VOICE
+            </button>
             <span>SYS.VER.2.0</span>
             <span className="w-px h-4 bg-white/20"></span>
             <span>AI CORE: ONLINE</span>
