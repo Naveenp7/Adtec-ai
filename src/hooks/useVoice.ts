@@ -128,9 +128,28 @@ export const useVoice = () => {
         }
     }, []);
 
+    // Error handling and auto-restart
+    useEffect(() => {
+        if (!browserSupportsSpeechRecognition) {
+            console.error("Browser does not support Speech Recognition.");
+            return;
+        }
+
+        // Restart listening if it stops unexpectedly
+        if (!listening && !isSpeaking) {
+            // Small delay to prevent rapid loops
+            const timeout = setTimeout(() => {
+                startListening();
+            }, 100);
+            return () => clearTimeout(timeout);
+        }
+    }, [listening, isSpeaking, browserSupportsSpeechRecognition]);
+
+
     return {
         listening,
         transcript,
+        resetTranscript,
         response,
         isSpeaking,
         speak,
